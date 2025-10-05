@@ -2,35 +2,65 @@ public class Rectangle {
     private double length;
     private double height;
 
+    // No-arg constructor so we can use setters later
+    public Rectangle() {
+        this.length = 1;  // default safe values
+        this.height = 1;
+    }
+
+    // Constructor with parameters if we want to set directly
     public Rectangle(double length, double height) {
-        this.length = length;
-        this.height = height;
+        setLength(length);   // use setters for validation
+        setHeight(height);
     }
-    public double area() {
-        double result = length * height;
-        return result;
+
+    public double getLength() {
+        return length;
     }
-    public double perimeter() {
-        double perimeter = (length + height) * 2;
-        return perimeter;
-    }
-    public boolean isSquare() {
-        if (length == height) {
-            return true;
+
+    public void setLength(double length) {
+        if (length > 0) {
+            this.length = length;
         } else {
-            return false;
+            System.out.println("Length must be greater than 0");
         }
     }
+
+    public double getHeight() {
+        return height;
+    }
+
+    public void setHeight(double height) {
+        if (height > 0) {
+            this.height = height;
+        } else {
+            System.out.println("Height must be greater than 0");
+        }
+    }
+
+    public double area() {
+        return length * height;
+    }
+
+    public double perimeter() {
+        return 2 * (length + height);
+    }
+
+    public boolean isSquare() {
+        return length == height;
+    }
+
     public static void main(String[] args) {
-        Rectangle r1 = new Rectangle(3.5, 5);
-        double result = r1.area();
-        System.out.println("The area of the rectangle is " + result);
+        // ✅ Create empty rectangle then use setters
+        Rectangle r1 = new Rectangle();
+        r1.setHeight(16.5);
+        r1.setLength(12.4);
 
-        double perimeter = r1.perimeter();
-        System.out.println("The perimeter of the rectangle is " + perimeter);
-
-        boolean isSquare = r1.isSquare();
-        System.out.println("Is the rectangle square? " + isSquare);
-
+        System.out.println("Length: " + r1.getLength());
+        System.out.println("Height: " + r1.getHeight());
+        System.out.println("The area of the rectangle is " + r1.area());
+        System.out.println("The perimeter of the rectangle is " + r1.perimeter());
+        System.out.println("Is it a square? " + r1.isSquare());
     }
 }
+
